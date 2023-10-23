@@ -33,10 +33,10 @@ function risi_kroznico_in_tocke(st, r)
     y = r*sin(theta);
     plot(x, y);
     
-    %axis equal;
-    %title('Naključno generirane točke na krožnici z lokom');
-    %xlabel('X-os');
-    %ylabel('Y-os');
-    %legend('Znotraj krožnice', 'Zunaj krožnice', 'Krožnica');
+    axis equal;
+    title('Graf točk');
+    xlabel('X-os');
+    ylabel('Y-os');
+    legend('Znotraj krožnice', 'Zunaj krožnice', 'Krožnica');
 end
 
