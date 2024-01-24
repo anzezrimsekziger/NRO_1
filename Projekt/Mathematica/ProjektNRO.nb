@@ -1,0 +1,521 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     18645,        511]
+NotebookOptionsPosition[     18282,        497]
+NotebookOutlinePosition[     18689,        513]
+CellTagsIndexPosition[     18646,        510]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Define", " ", "a", " ", "function", " ", "to", " ", "find", " ", "the", 
+    " ", "coordinates", " ", "of", " ", "a", " ", "point", " ", "in", " ", 
+    "the", " ", "grid"}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{"IskanjeVMrezi", "[", 
+     RowBox[{"vektor2D_", ",", "ID_"}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"yx", "=", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0"}], "}"}]}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"ii", "=", "1"}], ",", 
+         RowBox[{"ii", "<=", 
+          RowBox[{
+           RowBox[{"Length", "[", "vektor2D", "]"}], "-", "2"}]}], ",", 
+         RowBox[{"ii", "++"}], ",", 
+         RowBox[{
+          RowBox[{"For", "[", 
+           RowBox[{
+            RowBox[{"ji", "=", "1"}], ",", 
+            RowBox[{"ji", "<=", 
+             RowBox[{
+              RowBox[{"Length", "[", 
+               RowBox[{"vektor2D", "[", 
+                RowBox[{"[", "ii", "]"}], "]"}], "]"}], "-", "2"}]}], ",", 
+            RowBox[{"ji", "++"}], ",", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"vektor2D", "[", 
+                RowBox[{"[", 
+                 RowBox[{
+                  RowBox[{"ii", "+", "1"}], ",", 
+                  RowBox[{"ji", "+", "1"}]}], "]"}], "]"}], "==", "ID"}], ",", 
+              RowBox[{
+               RowBox[{"yx", "=", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"ii", "+", "1"}], ",", 
+                  RowBox[{"ji", "+", "1"}]}], "}"}]}], ";", 
+               "\[IndentingNewLine]", "Break", ";"}]}], "]"}]}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"vektor2D", "[", 
+              RowBox[{"[", 
+               RowBox[{"Sequence", "@@", "yx"}], "]"}], "]"}], "==", "ID"}], 
+            ",", "Break"}], "]"}], ";"}]}], "]"}], ";", "\[IndentingNewLine]",
+        "yx"}]}], "]"}]}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Read", " ", "data", " ", "from", " ", "the", " ", "file"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"StTock", ",", "StCelic", ",", "StPogojev", ",", "StPogN"}], 
+      "}"}], "=", 
+     RowBox[{
+      RowBox[{"Import", "[", 
+       RowBox[{"\"\<primer2mreza.txt\>\"", ",", "\"\<Table\>\""}], "]"}], "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Read", " ", "point", " ", "data"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SeznamIDTock", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"SeznamX", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"SeznamY", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"SeznamXY", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{"Do", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"IDTock", ",", "_", ",", "x", ",", "_", ",", "y"}], "}"}], 
+       "=", 
+       RowBox[{
+        RowBox[{"Import", "[", 
+         RowBox[{"\"\<primer2mreza.txt\>\"", ",", "\"\<Table\>\""}], "]"}], 
+        "[", 
+        RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"x", "=", 
+       RowBox[{
+        RowBox[{"Round", "[", 
+         RowBox[{"x", "*", "100"}], "]"}], "/", "100"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"y", "=", 
+       RowBox[{
+        RowBox[{"Round", "[", 
+         RowBox[{"y", "*", "100"}], "]"}], "/", "100"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"SeznamIDTock", ",", "IDTock"}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"SeznamX", ",", "x"}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"SeznamY", ",", "y"}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"SeznamXY", ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", "y"}], "}"}]}], "]"}], ";"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "3", ",", 
+       RowBox[{"2", "+", "StTock"}]}], "}"}]}], "]"}], "\[IndentingNewLine]", 
+   "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Read", " ", "cell", " ", "data"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SeznamIDCelic", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"SeznamT1", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"SeznamT2", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"SeznamT3", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"SeznamT4", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{"Do", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "IDCelic", ",", "_", ",", "t1", ",", "_", ",", "t2", ",", "_", ",", 
+         "t3", ",", "_", ",", "t4"}], "}"}], "=", 
+       RowBox[{
+        RowBox[{"Import", "[", 
+         RowBox[{"\"\<primer2mreza.txt\>\"", ",", "\"\<Table\>\""}], "]"}], 
+        "[", 
+        RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"SeznamIDCelic", ",", "IDCelic"}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"SeznamT1", ",", "t1"}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"SeznamT2", ",", "t2"}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"SeznamT3", ",", "t3"}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"SeznamT4", ",", "t4"}], "]"}], ";"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", 
+       RowBox[{"3", "+", "StTock"}], ",", 
+       RowBox[{"2", "+", "StTock", "+", "StCelic"}]}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Read", " ", "boundary", " ", "condition", " ", "data"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SeznamPogoj", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"RobPogKr", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"RobPogTemperatura", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"RobPogToplotnitok", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"RobPogPrestop", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\n", 
+   RowBox[{"Do", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "_", ",", "_", ",", "_", ",", "bes", ",", "_", ",", "_", ",", "_", 
+         ",", "_", ",", "_", ",", "_", ",", "_", ",", "_", ",", "_", ",", "_",
+          ",", "_", ",", "_", ",", "_", ",", "_", ",", "_", ",", "_", ",", 
+         "_", ",", "_"}], "}"}], "=", 
+       RowBox[{
+        RowBox[{"Import", "[", 
+         RowBox[{"\"\<primer2mreza.txt\>\"", ",", "\"\<Table\>\""}], "]"}], 
+        "[", 
+        RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"bes", "==", "\"\<temperatura\>\""}], ",", 
+        RowBox[{
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"RobPogKr", ",", 
+           RowBox[{"'", 
+            RowBox[{"t", "'"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"RobPogTemperatura", ",", 
+           RowBox[{
+            RowBox[{"Import", "[", 
+             RowBox[{"\"\<primer2mreza.txt\>\"", ",", "\"\<Table\>\""}], 
+             "]"}], "[", 
+            RowBox[{"[", 
+             RowBox[{"i", ",", "5"}], "]"}], "]"}]}], "]"}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"RobPogToplotnitok", ",", "0"}], "]"}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"RobPogPrestop", ",", "0"}], "]"}], ";"}], ",", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"bes", "==", "\"\<toplotni\>\""}], ",", 
+           RowBox[{
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"RobPogKr", ",", 
+              RowBox[{"'", 
+               RowBox[{"k", "'"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"RobPogTemperatura", ",", "0"}], "]"}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"RobPogToplotnitok", ",", 
+              RowBox[{
+               RowBox[{"Import", "[", 
+                RowBox[{"\"\<primer2mreza.txt\>\"", ",", "\"\<Table\>\""}], 
+                "]"}], "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", "7"}], "]"}], "]"}]}], "]"}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"RobPogPrestop", ",", "0"}], "]"}], ";"}], ",", 
+           RowBox[{
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"bes", "==", "\"\<prestop\>\""}], ",", 
+              RowBox[{
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"RobPogKr", ",", 
+                 RowBox[{"'", 
+                  RowBox[{"p", "'"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"RobPogTemperatura", ",", 
+                 RowBox[{
+                  RowBox[{"Import", "[", 
+                   RowBox[{"\"\<primer2mreza.txt\>\"", ",", "\"\<Table\>\""}],
+                    "]"}], "[", 
+                  RowBox[{"[", 
+                   RowBox[{"i", ",", "5"}], "]"}], "]"}]}], "]"}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"RobPogToplotnitok", ",", "0"}], "]"}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"RobPogPrestop", ",", 
+                 RowBox[{
+                  RowBox[{"Import", "[", 
+                   RowBox[{"\"\<primer2mreza.txt\>\"", ",", "\"\<Table\>\""}],
+                    "]"}], "[", 
+                  RowBox[{"[", 
+                   RowBox[{"i", ",", "9"}], "]"}], "]"}]}], "]"}], ";"}]}], 
+             "]"}], ";"}]}], "]"}], ";"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"SeznamPogoj", ",", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Import", "[", 
+            RowBox[{"\"\<primer2mreza.txt\>\"", ",", "\"\<Table\>\""}], "]"}],
+            "[", 
+           RowBox[{"[", 
+            RowBox[{"i", ",", "j"}], "]"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"j", ",", "9", ",", 
+            RowBox[{"Length", "[", 
+             RowBox[{
+              RowBox[{"Import", "[", 
+               RowBox[{"\"\<primer2mreza.txt\>\"", ",", "\"\<Table\>\""}], 
+               "]"}], "[", 
+              RowBox[{"[", "i", "]"}], "]"}], "]"}]}], "}"}]}], "]"}]}], 
+       "]"}], ";"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", 
+       RowBox[{"3", "+", "StTock", "+", "StCelic"}], ",", 
+       RowBox[{"2", "+", "StTock", "+", "StCelic", "+", "StPogojev"}]}], 
+      "}"}]}], "]"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Calculate", " ", "grid", " ", "dimensions"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dx", "=", "1.25"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"tockeX", "=", 
+     RowBox[{
+      RowBox[{"Round", "[", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"Max", "[", "SeznamX", "]"}], "-", 
+          RowBox[{"Min", "[", "SeznamX", "]"}]}], ")"}], "/", "dx"}], "]"}], 
+      "+", "1"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"tockeY", "=", 
+     RowBox[{
+      RowBox[{"Round", "[", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"Max", "[", "SeznamY", "]"}], "-", 
+          RowBox[{"Min", "[", "SeznamY", "]"}]}], ")"}], "/", "dx"}], "]"}], 
+      "+", "1"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"mreza", "=", 
+     RowBox[{"ConstantArray", "[", 
+      RowBox[{
+       RowBox[{"-", "1"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"tockeY", "+", "2"}], ",", 
+         RowBox[{"tockeX", "+", "2"}]}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Initialize", " ", "coefficients"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"M", "=", 
+     RowBox[{"ConstantArray", "[", 
+      RowBox[{"0", ",", 
+       RowBox[{"{", 
+        RowBox[{"StTock", ",", "StTock"}], "}"}]}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"b", "=", 
+     RowBox[{"ConstantArray", "[", 
+      RowBox[{"0", ",", 
+       RowBox[{"{", "StTock", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Set", " ", "up", " ", "boundary", " ", "conditions"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Do", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"ix", ",", "iy"}], "}"}], "=", 
+       RowBox[{"IskanjeVMrezi", "[", 
+        RowBox[{"mreza", ",", 
+         RowBox[{"SeznamIDTock", "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"RobPogKr", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "==", 
+         RowBox[{"'", 
+          RowBox[{"t", "'"}]}]}], ",", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"M", "[", 
+           RowBox[{"[", 
+            RowBox[{
+             RowBox[{"SeznamIDTock", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], ",", 
+             RowBox[{"SeznamIDTock", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], "]"}], "]"}], "=", "1"}], ";",
+          "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"b", "[", 
+           RowBox[{"[", 
+            RowBox[{"SeznamIDTock", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "]"}], "]"}], "=", 
+          RowBox[{"RobPogTemperatura", "[", 
+           RowBox[{"[", "i", "]"}], "]"}]}], ";"}], ",", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"RobPogKr", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "==", 
+            RowBox[{"'", 
+             RowBox[{"k", "'"}]}]}], ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"M", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"SeznamIDTock", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], ",", 
+                RowBox[{"SeznamIDTock", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], "]"}], "]"}], "=", "1"}], 
+            ";", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"b", "[", 
+              RowBox[{"[", 
+               RowBox[{"SeznamIDTock", "[", 
+                RowBox[{"[", "i", "]"}], "]"}], "]"}], "]"}], "=", 
+             RowBox[{"RobPogToplotnitok", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], ";"}], ",", 
+           RowBox[{
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"RobPogKr", "[", 
+                RowBox[{"[", "i", "]"}], "]"}], "==", 
+               RowBox[{"'", 
+                RowBox[{"p", "'"}]}]}], ",", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"ix2", ",", "iy2"}], "}"}], "=", 
+                RowBox[{"IskanjeVMrezi", "[", 
+                 RowBox[{"mreza", ",", 
+                  RowBox[{"SeznamPogoj", "[", 
+                   RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"M", "[", 
+                 RowBox[{"[", 
+                  RowBox[{
+                   RowBox[{"SeznamIDTock", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ",", 
+                   RowBox[{"SeznamPogoj", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}], "]"}], "=", 
+                RowBox[{"-", "1"}]}], ";", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"M", "[", 
+                 RowBox[{"[", 
+                  RowBox[{
+                   RowBox[{"SeznamIDTock", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ",", 
+                   RowBox[{"SeznamIDTock", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}], "]"}], "=", 
+                "1"}], ";", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"b", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"SeznamIDTock", "[", 
+                   RowBox[{"[", "i", "]"}], "]"}], "]"}], "]"}], "=", 
+                RowBox[{"RobPogPrestop", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], ";"}]}], "]"}], ";"}]}], 
+          "]"}], ";"}]}], "]"}], ";"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "SeznamIDTock", "]"}]}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Write", " ", "matrices", " ", "to", " ", "files"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{"\"\<M.txt\>\"", ",", "M", ",", "\"\<Table\>\""}], "]"}], ";"}], 
+   "\n", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{"\"\<b.txt\>\"", ",", "b", ",", "\"\<Table\>\""}], "]"}], ";"}], 
+   "\n"}]}]], "Input",
+ CellChangeTimes->{{3.915116384621737*^9, 
+  3.9151163846227603`*^9}},ExpressionUUID->"62203cc2-bb36-4e5d-81c2-\
+214a3f0765ff"]
+},
+WindowSize->{949.5, 472.5},
+WindowMargins->{{238.5, Automatic}, {Automatic, 118.5}},
+FrontEndVersion->"13.3 for Microsoft Windows (64-bit) (June 3, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9aeede90-54e4-49cc-ad36-69531979fad4"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 17720, 475, 1551, "Input",ExpressionUUID->"62203cc2-bb36-4e5d-81c2-214a3f0765ff"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
